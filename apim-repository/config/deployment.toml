@@ -167,7 +167,7 @@ url = "https://localhost:${mgt.transport.https.port}/devportal"
 [apim.cors]
 allow_origins = "*"
 allow_methods = ["GET","PUT","POST","DELETE","PATCH","OPTIONS"]
-allow_headers = ["authorization","Access-Control-Allow-Origin","Content-Type","SOAPAction","apikey","Internal-Key"]
+allow_headers = ["authorization","Access-Control-Allow-Origin","Content-Type","SOAPAction","apikey","Internal-Key","X-JWT-Assertion"]
 allow_credentials = false
 
 #[apim.throttling]
@@ -236,15 +236,15 @@ allow_credentials = false
 #enable_start_tls = false
 #enable_authentication = true
 
-#[apim.token.revocation]
-#notifier_impl = "org.wso2.carbon.apimgt.notification.TokenRevocationNotifierImpl"
-#enable_realtime_notifier = true
-#realtime_notifier.ttl = 5000
-#enable_persistent_notifier = true
-#persistent_notifier.hostname = "https://localhost:2379/v2/keys/jti/"
-#persistent_notifier.ttl = 5000
-#persistent_notifier.username = "root"
-#persistent_notifier.password = "root"
+[apim.token.revocation]
+notifier_impl = "org.wso2.carbon.apimgt.notification.TokenRevocationNotifierImpl"
+enable_realtime_notifier = true
+realtime_notifier.ttl = 5000
+enable_persistent_notifier = true
+persistent_notifier.hostname = "https://localhost:2379/v2/keys/jti/"
+persistent_notifier.ttl = 5000
+persistent_notifier.username = "root"
+persistent_notifier.password = "root"
 
 [[event_handler]]
 name="userPostSelfRegistration"
@@ -261,8 +261,9 @@ id = "token_revocation"
 type = "org.wso2.carbon.identity.core.handler.AbstractIdentityHandler"
 name = "org.wso2.is.notification.ApimOauthEventInterceptor"
 order = 1
+
 [event_listener.properties]
-notification_endpoint = "https://localhost:${mgt.transport.https.port}/internal/data/v1/notify"
+notification_endpoint = "https://192.168.55.41:${mgt.transport.https.port}/internal/data/v1/notify"
 username = "${admin.username}"
 password = "${admin.password}"
 'header.X-WSO2-KEY-MANAGER' = "default"
@@ -287,3 +288,11 @@ iat_validity_period = "1h"
 #service_url = "https://localhost:8080/transactions/records"
 #service_username = "admin"
 #service_password = "admin"
+
+[[apim.jwt.issuer]]
+name = "https://192.168.55.41:9444/oauth2/token"
+jwks.url = "https://192.168.55.41:9444/oauth2/jwks"
+
+[[apim.jwt.issuer]]
+name = "wso2is"
+jwks.url = "https://192.168.55.41:9443/oauth2/jwks"
