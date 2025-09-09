@@ -15,16 +15,16 @@ type = "database_unique_id"
 
 [database.shared_db]
 type = "postgre"
-url = "jdbc:postgresql://postgres:5432/apim_shared_db"
-username = "postgres"
+url = "jdbc:postgresql://192.168.55.41:5432/apim_shared_db"
+username = "wso2"
 password = "123456"
 driver = "org.postgresql.Driver"
 validationQuery = "SELECT 1"
 
 [database.apim_db]
 type = "postgre"
-url = "jdbc:postgresql://postgres:5432/apim_db"
-username = "postgres"
+url = "jdbc:postgresql://192.168.55.41:5432/apim_db"
+username = "wso2"
 password = "123456"
 driver = "org.postgresql.Driver"
 validationQuery = "SELECT 1"

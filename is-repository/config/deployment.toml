@@ -13,15 +13,15 @@ type = "database_unique_id"
 
 [database.identity_db]
 type = "postgre"
-url = "jdbc:postgresql://postgres:5432/wso2is_identity"
-username = "postgres"
+url = "jdbc:postgresql://192.168.55.41:5432/is_db"
+username = "wso2"
 password = "123456"
 driver = "org.postgresql.Driver"
 
 [database.shared_db]
 type = "postgre"
-url = "jdbc:postgresql://postgres:5432/wso2is_shared"
-username = "postgres"
+url = "jdbc:postgresql://192.168.55.41:5432/is_shared_db"
+username = "wso2"
 password = "123456"
 driver = "org.postgresql.Driver"
 
